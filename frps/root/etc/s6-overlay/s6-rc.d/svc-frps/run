@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+s6-setuidgid abc \
+    frps -c ${FRP_CONFIG_PATH}/config.toml

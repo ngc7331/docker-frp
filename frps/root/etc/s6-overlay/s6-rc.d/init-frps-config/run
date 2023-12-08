@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+mkdir -p ${FRP_CONFIG_PATH}
+
+if [[ ! -f ${FRP_CONFIG_PATH}/config.toml ]]; then
+    echo "${FRP_CONFIG_PATH}/config.toml" not exist, creat with template
+    cp /etc/frps/config.toml.template ${FRP_CONFIG_PATH}/config.toml || echo FAIL
+fi
+
+lsiown -R abc:abc ${FRP_CONFIG_PATH}

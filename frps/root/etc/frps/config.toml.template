@@ -1,0 +1,18 @@
+# Modify this file is NOT recommended, please use ENV or confd instead
+
+serverAddr = "0.0.0.0"
+serverPort = 7000
+
+auth.method = "{{ .Envs.AUTH_METHOD }}"
+auth.token  = "{{ .Envs.AUTH_TOKEN }}"
+auth.oidc.clientID         = "{{ .Envs.AUTH_OIDC_ID }}"
+auth.oidc.clientSecret     = "{{ .Envs.AUTH_OIDC_SECRET }}"
+auth.oidc.audience         = "{{ .Envs.AUTH_OIDC_AUDIENCE }}"
+auth.oidc.tokenEndpointURL = "{{ .Envs.AUTH_OIDC_ENDPOINT }}"
+
+webServer.addr     = "0.0.0.0"
+webServer.port     = 7500
+webServer.user     = "{{ .Envs.WEBUI_USER }}"
+webServer.password = "{{ .Envs.WEBUI_PASS }}"
+
+includes = ["{{ .Envs.FRP_CONFIG_PATH }}/confd/*.toml"]
