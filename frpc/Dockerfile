@@ -31,6 +31,6 @@ ENV PGID=1000
 ENV UMASK=002
 COPY root/ /
 
-EXPOSE 7400
+EXPOSE 7400/tcp
 
 VOLUME [ "/config" ]
