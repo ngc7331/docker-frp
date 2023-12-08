@@ -15,4 +15,8 @@ webServer.port     = 7500
 webServer.user     = "{{ .Envs.WEBUI_USER }}"
 webServer.password = "{{ .Envs.WEBUI_PASS }}"
 
+allowPorts = [
+    { start = 57000, end = 57100 }
+]
+
 includes = ["{{ .Envs.FRP_CONFIG_PATH }}/confd/*.toml"]
