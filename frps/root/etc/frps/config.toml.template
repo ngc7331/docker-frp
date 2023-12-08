@@ -1,7 +1,7 @@
 # Modify this file is NOT recommended, please use ENV or confd instead
 
-serverAddr = "0.0.0.0"
-serverPort = 7000
+bindAddr = "0.0.0.0"
+bindPort = 7000
 
 auth.method = "{{ .Envs.AUTH_METHOD }}"
 auth.token  = "{{ .Envs.AUTH_TOKEN }}"
