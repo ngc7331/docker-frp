@@ -1,7 +1,7 @@
 DOCKER_USER ?= ngc7331
 DOCKER_REPO ?= frp
 
-FRP_VERSION ?= 0.52.3
+FRP_VERSION ?= 0.53.0
 
 all: build push
 

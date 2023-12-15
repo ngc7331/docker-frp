@@ -2,7 +2,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy
 
 ENV CONFIG_PATH=/config
 
-ARG FRP_VERSION=0.52.3
+ARG FRP_VERSION=0.53.0
 ARG FRP_ARCH=amd64
 ENV FRP_CONFIG_PATH=${CONFIG_PATH}/frpc
 RUN curl -Ljo frp.tar.gz "https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_${FRP_ARCH}.tar.gz" && \
