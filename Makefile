@@ -7,9 +7,9 @@ all: build push
 
 update:
 	NEW_VERSION=$(subst v,,$(shell curl -s https://api.github.com/repos/fatedier/frp/releases/latest | jq '.name')) && \
-	sed -i "s/^FRP_VERSION := .*$$/FRP_VERSION := $$NEW_VERSION/" Makefile && \
-	sed -i "s/^ENV FRP_VERSION=.*$$/ENV FRP_VERSION=$$NEW_VERSION/" frpc/Dockerfile && \
-	sed -i "s/^ENV FRP_VERSION=.*$$/ENV FRP_VERSION=$$NEW_VERSION/" frps/Dockerfile
+	sed -i "s/^FRP_VERSION ?= .*$$/FRP_VERSION ?= $$NEW_VERSION/" Makefile && \
+	sed -i "s/^ARG FRP_VERSION=.*$$/ARG FRP_VERSION=$$NEW_VERSION/" frpc/Dockerfile && \
+	sed -i "s/^ARG FRP_VERSION=.*$$/ARG FRP_VERSION=$$NEW_VERSION/" frps/Dockerfile
 
 TARGETS := s c
 ifeq ($(filter $(TARGETS), $(TARGET)), )
