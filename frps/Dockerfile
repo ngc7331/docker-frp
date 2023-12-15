@@ -1,12 +1,12 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy
+FROM --platform=${TARGETPLATFORM} ghcr.io/linuxserver/baseimage-ubuntu:jammy
+ARG TARGETPLATFORM
 
 ENV CONFIG_PATH=/config
 
 ARG FRP_VERSION=0.53.0
-ARG FRP_ARCH=amd64
 ENV FRP_CONFIG_PATH=${CONFIG_PATH}/frps
-RUN curl -Ljo frp.tar.gz "https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_${FRP_ARCH}.tar.gz" && \
-    tar -xzvf frp.tar.gz --directory /usr/bin/ "frp_${FRP_VERSION}_linux_${FRP_ARCH}/frps" --strip-components 1 && \
+RUN curl -Ljo frp.tar.gz "https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_${TARGETPLATFORM#linux/}.tar.gz" && \
+    tar -xzvf frp.tar.gz --directory /usr/bin/ "frp_${FRP_VERSION}_linux_${TARGETPLATFORM#linux/}/frps" --strip-components 1 && \
     rm frp.tar.gz && \
     frps --version
 

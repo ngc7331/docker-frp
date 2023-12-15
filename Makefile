@@ -2,8 +2,9 @@ DOCKER_USER ?= ngc7331
 DOCKER_REPO ?= frp
 
 FRP_VERSION ?= 0.53.0
+PLATFORMS ?= linux/amd64,linux/arm64
 
-all: build push
+all: buildx
 
 update:
 	NEW_VERSION=$(subst v,,$(shell curl -s https://api.github.com/repos/fatedier/frp/releases/latest | jq '.name')) && \
@@ -16,11 +17,22 @@ ifeq ($(filter $(TARGETS), $(TARGET)), )
 $(error "TARGET must be 'c' or 's'")
 endif
 
-build:
+buildx:
 	cd $(DOCKER_REPO)$(TARGET) && \
-	docker build -t $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest . && \
-	docker tag $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):$(FRP_VERSION)
+	docker buildx build \
+		--build-arg FRP_VERSION=$(FRP_VERSION) \
+		--platform $(PLATFORMS) \
+		-t $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest \
+		-t $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):$(FRP_VERSION) \
+		--push .
 
-push:
-	docker push $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest
-	docker push $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):$(FRP_VERSION)
+# Deprecated
+# build:
+# 	cd $(DOCKER_REPO)$(TARGET) && \
+# 	docker build -t $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest . && \
+# 	docker tag $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):$(FRP_VERSION)
+
+# Deprecated
+# push:
+# 	docker push $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):latest
+# 	docker push $(DOCKER_USER)/$(DOCKER_REPO)$(TARGET):$(FRP_VERSION)
