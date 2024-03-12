@@ -1,7 +1,7 @@
 DOCKER_USER ?= ngc7331
 DOCKER_REPO ?= frp
 
-FRP_VERSION ?= 0.54.0
+FRP_VERSION ?= 0.55.1
 PLATFORMS ?= linux/amd64,linux/arm64
 
 all: buildx
