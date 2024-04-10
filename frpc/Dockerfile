@@ -3,7 +3,7 @@ ARG TARGETARCH
 
 ENV CONFIG_PATH=/config
 
-ARG FRP_VERSION=0.56.0
+ARG FRP_VERSION=0.57.0
 ENV FRP_CONFIG_PATH=${CONFIG_PATH}/frpc
 RUN curl -Ljo frp.tar.gz "https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_${TARGETARCH}.tar.gz" && \
     tar -xzvf frp.tar.gz --directory /usr/bin/ "frp_${FRP_VERSION}_linux_${TARGETARCH}/frpc" --strip-components 1 && \
