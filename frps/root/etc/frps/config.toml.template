@@ -5,10 +5,8 @@ bindPort = 7000
 
 auth.method = "{{ .Envs.AUTH_METHOD }}"
 auth.token  = "{{ .Envs.AUTH_TOKEN }}"
-auth.oidc.clientID         = "{{ .Envs.AUTH_OIDC_ID }}"
-auth.oidc.clientSecret     = "{{ .Envs.AUTH_OIDC_SECRET }}"
-auth.oidc.audience         = "{{ .Envs.AUTH_OIDC_AUDIENCE }}"
-auth.oidc.tokenEndpointURL = "{{ .Envs.AUTH_OIDC_ENDPOINT }}"
+auth.oidc.issuer   = "{{ .Envs.AUTH_OIDC_ISSUER }}"
+auth.oidc.audience = "{{ .Envs.AUTH_OIDC_AUDIENCE }}"
 
 webServer.addr     = "0.0.0.0"
 webServer.port     = 7500

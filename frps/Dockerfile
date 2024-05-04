@@ -12,10 +12,8 @@ RUN curl -Ljo frp.tar.gz "https://github.com/fatedier/frp/releases/download/v${F
 
 ENV AUTH_METHOD=token
 ENV AUTH_TOKEN=changeme
-ENV AUTH_OIDC_ID=
-ENV AUTH_OIDC_SECRET=
+ENV AUTH_OIDC_ISSUER=
 ENV AUTH_OIDC_AUDIENCE=
-ENV AUTH_OIDC_ENDPOINT=
 
 ENV WEBUI_USER=admin
 ENV WEBUI_PASS=changeme
