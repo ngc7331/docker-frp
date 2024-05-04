@@ -1,4 +1,4 @@
-# Modify this file is NOT recommended, please use ENV or confd instead
+# Modify this file is NOT recommended, please use ENV instead
 
 bindAddr = "0.0.0.0"
 bindPort = 7000
@@ -16,5 +16,3 @@ webServer.password = "{{ .Envs.WEBUI_PASS }}"
 allowPorts = [
     { start = 57000, end = 57100 }
 ]
-
-includes = ["{{ .Envs.FRP_CONFIG_PATH }}/confd/*.toml"]
