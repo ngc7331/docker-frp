@@ -54,5 +54,5 @@ jobs:
           tags: |
             ngc7331/frp${{ matrix.target }}:latest
             ngc7331/frp${{ matrix.target }}:${{ env.VERSION }}
-            ghcr.io/${{ github.repository_owner }}/${{ github.repository }}${{ matrix.target }}:latest
-            ghcr.io/${{ github.repository_owner }}/${{ github.repository }}${{ matrix.target }}:${{ env.VERSION }}
+            ghcr.io/${{ github.repository }}${{ matrix.target }}:latest
+            ghcr.io/${{ github.repository }}${{ matrix.target }}:${{ env.VERSION }}
