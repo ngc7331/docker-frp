@@ -49,7 +49,7 @@ jobs:
           context: frp${{ matrix.target }}
           build-args: |
             FRP_VERSION=${{ env.VERSION }}
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/riscv64
           push: true
           tags: |
             ngc7331/frp${{ matrix.target }}:latest

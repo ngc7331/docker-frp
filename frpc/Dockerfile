@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/linuxserver/baseimage-ubuntu:jammy
+FROM ghcr.io/ngc7331/docker-baseimage-alpine:3.20
 ARG TARGETARCH
 
 ENV CONFIG_PATH=/config
