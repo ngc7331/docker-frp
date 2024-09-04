@@ -10,49 +10,33 @@ jobs:
         include:
           - target: "c"
           - target: "s"
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
       - name: Get version
-        run: echo "VERSION=$(sed -n -r 's/^FRP_VERSION \?= (.*)/\1/p' Makefile)" >> $GITHUB_ENV
+        id: version
+        run: echo "VERSION=$(sed -n -r 's/^FRP_VERSION \?= (.*)/\1/p' Makefile)" >> $GITHUB_OUTPUT
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Build
+        uses: ngc7331/actions@docker-build
         with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_PASS }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
+          name: frp${{ matrix.target }}
+          version: ${{ steps.version.outputs.VERSION }}
           file: ./frp${{ matrix.target }}/Dockerfile
-          context: frp${{ matrix.target }}
-          build-args: |
-            FRP_VERSION=${{ env.VERSION }}
+          context: ./frp${{ matrix.target }}
           platforms: linux/amd64,linux/arm64,linux/riscv64
-          push: true
-          tags: |
-            ngc7331/frp${{ matrix.target }}:latest
-            ngc7331/frp${{ matrix.target }}:${{ env.VERSION }}
-            ghcr.io/${{ github.repository }}${{ matrix.target }}:latest
-            ghcr.io/${{ github.repository }}${{ matrix.target }}:${{ env.VERSION }}
+          build_args: |
+            FRP_VERSION=${{ steps.version.outputs.VERSION }}
+          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+          DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
