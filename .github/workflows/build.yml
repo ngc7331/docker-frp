@@ -24,7 +24,8 @@ jobs:
 
       - name: Get version
         id: version
-        run: echo "VERSION=$(sed -n -r 's/^FRP_VERSION \?= (.*)/\1/p' Makefile)" >> $GITHUB_OUTPUT
+        run: |
+          echo "VERSION=$(grep -E 'frp version: [0-9.]+' README.md | grep -oP '[0-9.]+')" >> $GITHUB_OUTPUT
 
       - name: Build
         uses: ngc7331/actions@docker-build
