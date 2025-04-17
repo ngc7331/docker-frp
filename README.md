@@ -4,4 +4,4 @@ See: [fatedier/frp](https://github.com/fatedier/frp)
 
 ## Last build info
 
-- frp version: 0.61.2
+- frp version: 0.62.0
