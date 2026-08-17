@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/linuxserver/baseimage-alpine:3.24
 ARG TARGETARCH
 
 ENV CONFIG_PATH=/config
